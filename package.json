@@ -4,7 +4,21 @@
   "description": "",
   "main": "catfacts.js",
   "preferGlobal": true,
-  "bin": "./bin/cli.js",
+  "bin": {
+    "catfacts": "./bin/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frxnz/node-catfacts"
+  },
+  "bugs": {
+    "url": "https://github.com/frxnz/node-catfacts/issues"
+  },
+  "keywords": [
+    "catfacts",
+    "cat",
+    "facts"
+  ],
   "dependencies": {
     "chalk": "^1.1.1",
     "commander": "^2.9.0",

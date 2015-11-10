@@ -4,6 +4,8 @@ Catfacts is a command line tool for retrieving and sending cat facts.
 
 > While many cats enjoy milk, it will give some cats diarrhea.
 
+*Sending cat facts via SMS requires a Twilio account*
+
 ## Installation
 
 Install catfacts as a global module via npm
@@ -20,9 +22,21 @@ You can get help with the CLI at any time by running `catfacts -h`.
 
 Interactive interface for setting up Twilio credentials
 
+*Sending cat facts via SMS requires a Twilio account*
+
 #### `catfacts random|r [options]`
 
 Get a random cat fact.
 
 **Options:**
 `t, --text <number>` Send cat fact via SMS
+
+#### `catfacts phonebook|p <cmd>`
+
+Perform actions on the phonebook
+
+**Commands:**
+
+`read` Show all phonebook entries
+
+`add` Interactively add a new phonebook entry

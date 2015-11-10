@@ -5,6 +5,7 @@ var inquirer = require('inquirer');
 var ini = require('ini')
 var fs = require('fs');
 var pjson = require('../package.json');
+var book = require('../lib/phonebook.json');
 var setupQuestions = require('../lib/setup.js');
 var Catfacts = require('../catfacts.js');
 var chalk = require('chalk');
@@ -12,6 +13,37 @@ var chalk = require('chalk');
 var catfacts = new Catfacts();
 var config;
 var twilio;
+
+var phonebook = {
+    read : function () {
+        for (var person in book) {
+            if( book.hasOwnProperty(person) ) {
+                log(chalk.cyan(person));
+                log(book[person] + '\n');
+            }
+        }
+    },
+    add : function () {
+        inquirer.prompt([
+            {
+                type: "input",
+                name: "name",
+                message: "Name"
+            },
+            {
+                type: "input",
+                name: "number",
+                message: "Phone Number"
+            },
+        ], function (answers) {
+            book[answers.name] = answers.number;
+            fs.writeFile('./lib/phonebook.json', JSON.stringify(book, null, 2), function (err) {
+                if (err) throw err;
+                log(chalk.green('Phonebook stored'));
+            });
+        });
+    }
+};
 
 try {
     config = ini.parse(fs.readFileSync('./.env', 'utf-8'))
@@ -34,7 +66,6 @@ program
 
         catfacts.random(function (res) {
             var str = '';
-            var fact;
 
             res.on('data', function (chunk) {
                 str += chunk;
@@ -60,6 +91,14 @@ program
         inquirer.prompt(setupQuestions, createEnv);
     });
 
+program
+    .command('phonebook <cmd>')
+    .alias('p')
+    .description('Perform actions on the phonebook')
+    .action(function (cmd, opts) {
+        phonebook[cmd](opts);
+    });
+
 program.parse(process.argv);
 
 function log (text) {
@@ -69,6 +108,10 @@ function log (text) {
 function sendText (number, message) {
     twilio = twilio || require('twilio')(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN);
     log(chalk.green('Sending cat fact to ') + number);
+
+    if (number in book) {
+        number = book[number];
+    }
 
     twilio.messages.create({
         to: number,

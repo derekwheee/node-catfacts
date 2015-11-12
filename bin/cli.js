@@ -87,8 +87,13 @@ program
     .command('setup')
     .alias('s')
     .description('Set some things up')
-    .action(function () {
-        inquirer.prompt(setupQuestions, createEnv);
+    .option('-r,--read', 'Read current setup config')
+    .action(function (opts) {
+        if (opts.read) {
+            console.log(config);
+        } else {
+            inquirer.prompt(setupQuestions, createEnv);
+        }
     });
 
 program

@@ -136,11 +136,11 @@ function createEnv (opts) {
 
     fs.readFile('./.env', function (err, data) {
         if (err) {
-            log(chalk.green('Storing configutaration...'));
+            log(chalk.green('Storing configuration...'));
 
             fs.writeFile('./.env', ini.encode(newConfig), function (err) {
                 if (err) throw err;
-                log(chalk.green('Configutaration stored'));
+                log(chalk.green('Configuration stored'));
 
                 config = newConfig;
             });

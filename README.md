@@ -29,7 +29,7 @@ Interactive interface for setting up Twilio credentials
 Get a random cat fact.
 
 **Options:**
-`t, --text <number>` Send cat fact via SMS
+`-t, --text <number|name>` Send cat fact via SMS
 
 #### `catfacts phonebook|p <cmd>`
 

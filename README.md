@@ -54,5 +54,4 @@ Catfacts.random(5, function (facts) {
         console.log(chalk.inverse(fact));
     });
 });
-});
 ```

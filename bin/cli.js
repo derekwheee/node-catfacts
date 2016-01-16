@@ -10,7 +10,6 @@ var setupQuestions = require('../lib/setup.js');
 var Catfacts = require('../catfacts.js');
 var chalk = require('chalk');
 
-var catfacts = new Catfacts();
 var config;
 var twilio;
 
@@ -64,22 +63,13 @@ program
             return;
         }
 
-        catfacts.random(function (res) {
-            var str = '';
+        Catfacts.random(function (fact) {
 
-            res.on('data', function (chunk) {
-                str += chunk;
-            });
+            log(chalk.inverse(fact));
 
-            res.on('end', function () {
-                var fact = JSON.parse(str).facts[0]
-
-                log(chalk.inverse(fact));
-
-                if (opts.text) {
-                    sendText(opts.text, fact);
-                }
-            });
+            if (opts.text) {
+                sendText(opts.text, fact);
+            }
         });
     });
 

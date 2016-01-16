@@ -40,3 +40,19 @@ Perform actions on the phonebook
 `read` Show all phonebook entries
 
 `add` Interactively add a new phonebook entry
+
+## Using `catfacts` Programmatically
+
+`catfacts` can also be used programmitically.
+
+```js
+var chalk = require('chalk');
+var Catfacts = require('../catfacts');
+
+Catfacts.random(5, function (facts) {
+    facts.forEach(function (fact) {
+        console.log(chalk.inverse(fact));
+    });
+});
+});
+```

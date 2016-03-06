@@ -1,14 +1,16 @@
 #!/usr/bin/env node
 
-var program = require('commander');
-var inquirer = require('inquirer');
-var ini = require('ini')
-var fs = require('fs');
-var pjson = require('../package.json');
-var book = require('../lib/phonebook.json');
-var setupQuestions = require('../lib/setup.js');
-var Catfacts = require('../catfacts.js');
-var chalk = require('chalk');
+import program from 'commander';
+import inquirer from 'inquirer';
+import ini from 'ini'
+import fs from 'fs';
+import pjson from '../../package.json';
+import book from '../../phonebook.json';
+import setupQuestions from '../lib/setup.js';
+import Catfacts from '../catfacts.js';
+import chalk from 'chalk';
+
+let catfacts = new Catfacts();
 
 var config;
 var twilio;
@@ -36,7 +38,7 @@ var phonebook = {
             },
         ], function (answers) {
             book[answers.name] = answers.number;
-            fs.writeFile('./lib/phonebook.json', JSON.stringify(book, null, 2), function (err) {
+            fs.writeFile('./phonebook.json', JSON.stringify(book, null, 2), function (err) {
                 if (err) throw err;
                 log(chalk.green('Phonebook stored'));
             });
@@ -63,7 +65,7 @@ program
             return;
         }
 
-        Catfacts.random(function (fact) {
+        catfacts.random(function (fact) {
 
             log(chalk.inverse(fact));
 

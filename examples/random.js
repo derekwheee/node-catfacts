@@ -1,7 +1,8 @@
 var chalk = require('chalk');
-var Catfacts = require('../catfacts');
+var Catfacts = require('../dist/catfacts');
+var catfacts = new Catfacts();
 
-Catfacts.random(5, function (facts) {
+catfacts.random(5, function (facts) {
     facts.forEach(function (fact) {
         console.log(chalk.inverse(fact));
     });

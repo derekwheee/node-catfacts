@@ -1,11 +1,11 @@
 {
   "name": "catfacts",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "",
-  "main": "catfacts.js",
+  "main": "./dist/catfacts.js",
   "preferGlobal": true,
   "bin": {
-    "catfacts": "./bin/cli.js"
+    "catfacts": "./dist/bin/cli.js"
   },
   "repository": {
     "type": "git",
@@ -26,7 +26,16 @@
     "inquirer": "^0.11.0",
     "twilio": "^2.5.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.6.5",
+    "babel-preset-es2015": "^6.6.0",
+    "chalk": "^1.1.1",
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-eslint": "^2.0.0",
+    "gulp-sourcemaps": "^1.6.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
